@@ -128,11 +128,15 @@ export default class StickerModal extends Component {
           }}
           ref={ref => (this.scrollViewRef = ref)}
         >
-          <View style={{justifyContent: "center",
-          alignItems: "center"}}>
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
             <Text
               style={[
-                { fontSize: this.props.DIMS.width * 0.07, color: "#1A1A1A", }
+                { fontSize: this.props.DIMS.width * 0.07, color: "#1A1A1A" }
               ]}
             >
               Choose A Sticker
@@ -156,11 +160,7 @@ export default class StickerModal extends Component {
             }
           ]}
         >
-          <Text
-            style={[
-              { fontSize: this.props.DIMS.width * 0.07 }
-            ]}
-          >
+          <Text style={[{ fontSize: this.props.DIMS.width * 0.07 }]}>
             CLOSE
           </Text>
         </TouchableOpacity>

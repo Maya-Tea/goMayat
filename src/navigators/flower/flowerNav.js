@@ -1,19 +1,11 @@
 import React, { Component } from "react";
-import { withNavigation } from 'react-navigation';
+import { withNavigation } from "react-navigation";
 
 //import { connect } from "react-redux";
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  View,
-  Button,
-} from "react-native";
+import { Animated, Dimensions, StyleSheet, View, Button } from "react-native";
 
 import NavModal from "./NavModal";
-import {
-  Flower,
-} from "./animSVGs";
+import { Flower } from "./animSVGs";
 
 const Height = Dimensions.get("window").height;
 const Width = Dimensions.get("window").width;
@@ -24,8 +16,8 @@ class FlowerNav extends Component {
     super(props);
     this.state = {
       showHomeIcon: true,
-      logoWidth: DIMS.width*0.125,
-      logoHeight: DIMS.width*0.125,
+      logoWidth: DIMS.width * 0.125,
+      logoHeight: DIMS.width * 0.125,
       iconRotate: new Animated.Value(0),
       iconsPressRotate: new Animated.Value(0),
       iconsGrow: new Animated.Value(0),
@@ -37,14 +29,12 @@ class FlowerNav extends Component {
       isAtomVisible: false
     };
   }
-  componentDidMount(){
-  //  this.iconAnimate();
+  componentDidMount() {
+    //  this.iconAnimate();
   }
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps(newProps) {}
 
-  }
-
-  iconAnimate=()=>{
+  iconAnimate = () => {
     console.log("icon Press");
     //this.setState({isAtomVisible:true});
     Animated.sequence([
@@ -55,7 +45,7 @@ class FlowerNav extends Component {
       Animated.timing(this.state.iconRotate, {
         toValue: 0,
         duration: 2000
-      }),
+      })
       // Animated.timing(this.state.iconRotate, {
       //   toValue: 200,
       //   duration: 2000
@@ -65,20 +55,19 @@ class FlowerNav extends Component {
       //   duration: 2000
       // }),
     ]).start();
-}
+  };
 
-iconPress=()=> {
-  Animated.sequence([
-    Animated.timing(this.state.iconRotate, {
-      toValue: 200,
-      duration: 2000
-    }),
-    Animated.timing(this.state.iconRotate, {
-      toValue: 0,
-      duration: 2000
-    }),
-
-  ]).start();
+  iconPress = () => {
+    Animated.sequence([
+      Animated.timing(this.state.iconRotate, {
+        toValue: 200,
+        duration: 2000
+      }),
+      Animated.timing(this.state.iconRotate, {
+        toValue: 0,
+        duration: 2000
+      })
+    ]).start();
     Animated.sequence([
       Animated.spring(this.state.logoGrow, {
         toValue: 60,
@@ -95,39 +84,44 @@ iconPress=()=> {
         delay: 400
       })
     ]).start();
-  }
-
+  };
 
   // navigate(onHomeScreen) {
   //   return this.setState({ isAtomVisible: !this.state.isAtomVisible });
   // }
 
   render() {
-
-    const animateS1={
+    const animateS1 = {
       transform: [
         {
           rotateZ: this.state.iconRotate.interpolate({
             inputRange: [0, 200],
             outputRange: ["0deg", "720deg"]
           })
-        },
+        }
       ]
-    }
-    const animateS2={
+    };
+    const animateS2 = {
       transform: [
         {
           rotateY: this.state.iconRotate.interpolate({
             inputRange: [0, 200],
             outputRange: ["0deg", "720deg"]
           })
-        },
+        }
       ]
-    }
+    };
 
     return (
-       <View style={{ display:'flex', height:this.state.logoHeight, width:this.state.logoWidth, justifyContent:'center', alignItems:'center'}}>
-
+      <View
+        style={{
+          display: "flex",
+          height: this.state.logoHeight,
+          width: this.state.logoWidth,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
         <Flower
           //calculateIcon={this.calculateIcon}
           showIcon={this.state.showHomeIcon}
@@ -136,22 +130,23 @@ iconPress=()=> {
           iconRotate={this.state.iconRotate}
           animate={animateS2}
           inCircle={true}
-          color='silver'
+          color="silver"
           onPress={() => {
             //this.navigate();
             this.iconPress();
-            this.setState({isAtomVisible:true});
+            this.setState({ isAtomVisible: true });
 
             //this.props.toolTip(false, null);
           }}
         />
-      {/* </View> */}
-
+        {/* </View> */}
 
         <NavModal
           isVisible={this.state.isAtomVisible}
           navigation={this.props.navigation}
-          closeModal={() => this.setState({ isAtomVisible: !this.state.isAtomVisible })}
+          closeModal={() =>
+            this.setState({ isAtomVisible: !this.state.isAtomVisible })
+          }
           DIMS={DIMS}
           iconsGrow={this.state.iconsGrow}
           iconsShow={this.state.iconsShow}

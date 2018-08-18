@@ -15,8 +15,8 @@ class FlowerAnimation extends Component {
     super(props);
     this.state = {
       showHomeIcon: true,
-      logoWidth: Width*0.4,
-      logoHeight: Width*0.4,
+      logoWidth: Width * 0.4,
+      logoHeight: Width * 0.4,
       iconRotate: new Animated.Value(0),
       iconsPressRotate: new Animated.Value(0),
       // iconsGrow: new Animated.Value(0),
@@ -58,9 +58,9 @@ class FlowerAnimation extends Component {
       // }),
     ]).start();
   };
-  iconPress=()=>{
+  iconPress = () => {
     console.log("press");
-  }
+  };
 
   render() {
     const animateS1 = {
@@ -203,11 +203,9 @@ class FlowerAnimation extends Component {
             this.iconPress();
           }}
         />
-
       </View>
     );
   }
 }
-
 
 export default withNavigation(FlowerAnimation);

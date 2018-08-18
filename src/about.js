@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from "react-navigation";
 
 import {
   StyleSheet,
@@ -8,14 +8,14 @@ import {
   ScrollView,
   Text,
   Dimensions,
-  FlatList,
+  FlatList
 } from "react-native";
 
 import Icon from "react-native-vector-icons/MaterialIcons";
 import ViewShot from "react-native-view-shot";
 import ImagePicker from "react-native-image-picker";
 import LinearGradient from "react-native-linear-gradient";
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Col, Row, Grid } from "react-native-easy-grid";
 
 const DIMS = {
   height: Dimensions.get("window").height,
@@ -27,21 +27,18 @@ class About extends Component {
     super(props);
 
     this.state = {
-      imageArray: [],
+      imageArray: []
     };
   }
 
-  componentDidMount() {
-  }
-
+  componentDidMount() {}
 
   render() {
     console.log("inRender", this.state.imageArray);
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
         <Text>About</Text>
-    </SafeAreaView>
-
+      </SafeAreaView>
     );
   }
 }

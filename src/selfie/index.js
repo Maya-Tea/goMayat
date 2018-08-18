@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from "react-navigation";
 
 import Modal from "react-native-modal";
 import Svg, { G, Circle, Path } from "react-native-svg";
@@ -122,16 +122,16 @@ export default class Stickers extends Component {
   }
 
   componentDidUpdate() {
-    console.log('didUpdate');
+    console.log("didUpdate");
     //this.iconAnimate();
   }
   componentWillReceiveProps() {
-    console.log('recieveProps');
+    console.log("recieveProps");
     this.clearArrays();
   }
 
-  componentWillUnmount(){
-      this.clearArrays();
+  componentWillUnmount() {
+    this.clearArrays();
     console.log("unmounting");
   }
 
@@ -316,16 +316,18 @@ export default class Stickers extends Component {
       this.state.lightness
     }%)`;
 
-    const hueColors=[];
-    const satColors=[];
-    const lightColors=[];
+    const hueColors = [];
+    const satColors = [];
+    const lightColors = [];
 
-    for(let i=0; i<=360; i+=10){
+    for (let i = 0; i <= 360; i += 10) {
       hueColors.push(`hsl(${i}, 100%, 50%)`);
     }
-    for(let i=0; i<=100; i+=10){
+    for (let i = 0; i <= 100; i += 10) {
       satColors.push(`hsl(${this.state.hue}, ${i}%, 50%)`);
-      lightColors.push(`hsl(${this.state.hue}, ${this.state.saturation}%, ${i}%)`);
+      lightColors.push(
+        `hsl(${this.state.hue}, ${this.state.saturation}%, ${i}%)`
+      );
     }
 
     return (
@@ -380,18 +382,18 @@ export default class Stickers extends Component {
         <LinearGradient
           colors={hueColors}
           style={{
-          //  position: "absolute",
+            //  position: "absolute",
             bottom: 0,
             paddingRight: 10,
             paddingLeft: 10,
             borderRadius: 5,
-            marginBottom:5
+            marginBottom: 5
           }}
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
         >
           <Slider
-            style={{ width: DIMS.width*0.8, height: 20, borderRadius: 50 }}
+            style={{ width: DIMS.width * 0.8, height: 20, borderRadius: 50 }}
             minimumValue={0}
             maximumValue={360}
             //value={this.state.slideValue}
@@ -403,51 +405,49 @@ export default class Stickers extends Component {
         <LinearGradient
           colors={satColors}
           style={{
-          //  position: "absolute",
+            //  position: "absolute",
             bottom: 0,
             paddingRight: 10,
             paddingLeft: 10,
             borderRadius: 5,
-            marginBottom:5
+            marginBottom: 5
           }}
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
         >
-        <Slider
-          style={{ width: DIMS.width*0.8, height: 20, borderRadius: 50}}
-          minimumValue={0}
-          maximumValue={100}
-          value={100}
-          onValueChange={value => this.setState({ saturation: value })}
-          maximumTrackTintColor="black"
-          minimumTrackTintColor="black"
-        />
-      </LinearGradient>
+          <Slider
+            style={{ width: DIMS.width * 0.8, height: 20, borderRadius: 50 }}
+            minimumValue={0}
+            maximumValue={100}
+            value={100}
+            onValueChange={value => this.setState({ saturation: value })}
+            maximumTrackTintColor="black"
+            minimumTrackTintColor="black"
+          />
+        </LinearGradient>
         <LinearGradient
           colors={lightColors}
           style={{
-          //  position: "absolute",
+            //  position: "absolute",
             bottom: 0,
             paddingRight: 10,
             paddingLeft: 10,
             borderRadius: 5,
-            marginBottom:5
+            marginBottom: 5
           }}
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
         >
-        <Slider
-          style={{width: DIMS.width*0.8, height: 20, borderRadius: 50 }}
-          minimumValue={0}
-          maximumValue={100}
-          value={50}
-          onValueChange={value => this.setState({ lightness: value })}
-          maximumTrackTintColor="black"
-          minimumTrackTintColor="black"
-        />
-      </LinearGradient>
-
-
+          <Slider
+            style={{ width: DIMS.width * 0.8, height: 20, borderRadius: 50 }}
+            minimumValue={0}
+            maximumValue={100}
+            value={50}
+            onValueChange={value => this.setState({ lightness: value })}
+            maximumTrackTintColor="black"
+            minimumTrackTintColor="black"
+          />
+        </LinearGradient>
       </View>
     );
   };
@@ -524,31 +524,45 @@ export default class Stickers extends Component {
           : messages[this.state.selectedItem.index]._scale;
 
       return (
-      <View style={{display:'flex', flexDirection:'row', backgroundColor:'black' }}>
-        <View style={{ width:DIMS.width*0.2, alignItems:'center', justifyContent:'center' }}>
-        <Text style={{color:'white', fontSize: DIMS.width*0.04}}>RESIZE</Text>
-      </View>
-        <Slider
-          style={{ width:DIMS.width*0.8, height: 30, borderRadius: 50 }}
-          minimumValue={0}
-          maximumValue={4}
-          orientation="vertical"
-          value={scaleToAdjust}
-          onValueChange={
-            type === "sticker"
-              ? value => {
-                  stickers[this.state.selectedItem.index]._scale = value;
-                  this.setState({ scale: value });
-                }
-              : value => {
-                  messages[this.state.selectedItem.index]._scale = value;
-                  this.setState({ scale: value });
-                }
-          }
-          maximumTrackTintColor="white"
-          minimumTrackTintColor="white"
-        />
-      </View>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            backgroundColor: "black"
+          }}
+        >
+          <View
+            style={{
+              width: DIMS.width * 0.2,
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <Text style={{ color: "white", fontSize: DIMS.width * 0.04 }}>
+              RESIZE
+            </Text>
+          </View>
+          <Slider
+            style={{ width: DIMS.width * 0.8, height: 30, borderRadius: 50 }}
+            minimumValue={0}
+            maximumValue={4}
+            orientation="vertical"
+            value={scaleToAdjust}
+            onValueChange={
+              type === "sticker"
+                ? value => {
+                    stickers[this.state.selectedItem.index]._scale = value;
+                    this.setState({ scale: value });
+                  }
+                : value => {
+                    messages[this.state.selectedItem.index]._scale = value;
+                    this.setState({ scale: value });
+                  }
+            }
+            maximumTrackTintColor="white"
+            minimumTrackTintColor="white"
+          />
+        </View>
       );
     }
   };
@@ -665,13 +679,12 @@ export default class Stickers extends Component {
                   style={{
                     position: "absolute",
                     height: stickerSize,
-                    width: stickerSize,
+                    width: stickerSize
                   }}
                   source={sticker.source}
                 />
               </RotationGestureHandler>
             </Animated.View>
-
           </PanGestureHandler>
         </Animated.View>
       );
@@ -707,147 +720,140 @@ export default class Stickers extends Component {
             onGestureEvent={messageEvents[i]._onGestureEvent}
             onHandlerStateChange={messageFunctions[i]._onHandlerStateChange}
           >
-
-
             <Animated.Text style={message.textStyles}>
               {message.textContent}
             </Animated.Text>
-
-
           </PanGestureHandler>
         </Animated.View>
       );
     });
 
     return (
-      <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+        <View style={{ flex: 1 }}>
+          <ViewShot
+            ref={_viewshot => (this.viewShot = _viewshot)}
+            options={backgroundSize}
+          >
+            {this.state.selfieSource ? (
+              <Image
+                style={[backgroundSize]}
+                source={{ uri: this.state.selfieSource }}
+              />
+            ) : (
+              <Image
+                style={[backgroundSize]}
+                source={require("./images/catSelfie.jpeg")}
+              />
+            )}
+            {/* {this.addBrandMark()} */}
+            {selectedStickers}
+            {addedText}
+            {this.state.textMode ? this.addText() : null}
 
-      <View style={{ flex: 1 }}>
-        <ViewShot
-          ref={_viewshot => (this.viewShot = _viewshot)}
-          options={backgroundSize}
-        >
-          {this.state.selfieSource ? (
-            <Image
-              style={[backgroundSize]}
-              source={{ uri: this.state.selfieSource }}
-            />
-          ) : (
-            <Image
-              style={[backgroundSize]}
-              source={require("./images/catSelfie.jpeg")
-              }
-            />
-
-          )}
-          {/* {this.addBrandMark()} */}
-          {selectedStickers}
-          {addedText}
-          {this.state.textMode ? this.addText() : null}
-
-          {this.state.brandMark ? this.addBrandMark() : null}
-        </ViewShot>
-        {this.state.ActivityIndicator ? (
+            {this.state.brandMark ? this.addBrandMark() : null}
+          </ViewShot>
+          {this.state.ActivityIndicator ? (
+            <View
+              style={[
+                backgroundSize,
+                {
+                  position: "absolute",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "rgba(0,0,0,.5)",
+                  position: "absolute"
+                }
+              ]}
+            >
+              <ActivityIndicator size="large" color="#D92A1C" />
+            </View>
+          ) : null}
           <View
-            style={[
-              backgroundSize,
-              {
-                position: "absolute",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "rgba(0,0,0,.5)",
-                position: "absolute"
-              }
-            ]}
-          >
-            <ActivityIndicator size="large" color="#D92A1C" />
-          </View>
-        ) : null}
-        <View
-          style={{
-            position: "absolute",
-            left: 0,
-            display: "flex",
-            flexDirection: "row"
-          }}
-        >
-          <TouchableOpacity
-            style={[
-              styles.iconButtonContainer,
-              {
-                borderRadius: 50,
-                backgroundColor: "black",
-                height: iconSize,
-                width: iconSize,
-                margin: DIMS.width * 0.03
-              }
-            ]}
-            onPress={this.choosePicture}
-          >
-            <Icon
-              style={{ top: DIMS.width * 0.016, left: DIMS.width * 0.016 }}
-              name={"camera"}
-              size={DIMS.width * 0.08}
-              color={"white"}
-            />
-          </TouchableOpacity>
-
-          {this.deleteButton()}
-        </View>
-        <View style={{ position: "absolute", bottom: 0 }}>
-          {this.scaleSlider()}
-        </View>
-        <View
-          style={{ position: "absolute", right: 0, backgroundColor: "black" }}
-        >
-          <TouchableOpacity
-            onPress={e =>
-              //  this.navigateBack()
-              this.showModal("stickerModal", this.state.stickerModal)
-            }
-            style={{ margin: DIMS.width * 0.015 }}
-          >
-            <Icon
-              name={"collections"}
-              size={DIMS.width * 0.08}
-              color={"white"}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              this.setState({ textMode: !this.state.textMode });
+            style={{
+              position: "absolute",
+              left: 0,
+              display: "flex",
+              flexDirection: "row"
             }}
-            style={{ margin: DIMS.width * 0.015 }}
           >
-            <Icon
-              name={"text-fields"}
-              size={DIMS.width * 0.08}
-              color={"white"}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={this.onImageSave}
-            style={{ margin: DIMS.width * 0.015 }}
+            <TouchableOpacity
+              style={[
+                styles.iconButtonContainer,
+                {
+                  borderRadius: 50,
+                  backgroundColor: "black",
+                  height: iconSize,
+                  width: iconSize,
+                  margin: DIMS.width * 0.03
+                }
+              ]}
+              onPress={this.choosePicture}
+            >
+              <Icon
+                style={{ top: DIMS.width * 0.016, left: DIMS.width * 0.016 }}
+                name={"camera"}
+                size={DIMS.width * 0.08}
+                color={"white"}
+              />
+            </TouchableOpacity>
+
+            {this.deleteButton()}
+          </View>
+          <View style={{ position: "absolute", bottom: 0 }}>
+            {this.scaleSlider()}
+          </View>
+          <View
+            style={{ position: "absolute", right: 0, backgroundColor: "black" }}
           >
-            <Icon name={"archive"} size={DIMS.width * 0.08} color={"white"} />
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              onPress={e =>
+                //  this.navigateBack()
+                this.showModal("stickerModal", this.state.stickerModal)
+              }
+              style={{ margin: DIMS.width * 0.015 }}
+            >
+              <Icon
+                name={"collections"}
+                size={DIMS.width * 0.08}
+                color={"white"}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                this.setState({ textMode: !this.state.textMode });
+              }}
+              style={{ margin: DIMS.width * 0.015 }}
+            >
+              <Icon
+                name={"text-fields"}
+                size={DIMS.width * 0.08}
+                color={"white"}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.onImageSave}
+              style={{ margin: DIMS.width * 0.015 }}
+            >
+              <Icon name={"archive"} size={DIMS.width * 0.08} color={"white"} />
+            </TouchableOpacity>
+          </View>
 
-        <StickerModal
-          DIMS={DIMS}
-          stickerModal={this.state.stickerModal}
-          closeStickerModal={this.closeStickerModal}
-          closeModal={this.closeModal}
-          images={stickerImages}
-        />
+          <StickerModal
+            DIMS={DIMS}
+            stickerModal={this.state.stickerModal}
+            closeStickerModal={this.closeStickerModal}
+            closeModal={this.closeModal}
+            images={stickerImages}
+          />
 
-        <SeeSelfie
-          DIMS={DIMS}
-          source={this.state.selfieURI}
-          closeModal={this.closeModal}
-          seeSelfieModal={this.state.seeSelfieModal}
-        />
-        {/* <ShareModal
+          <SeeSelfie
+            DIMS={DIMS}
+            source={this.state.selfieURI}
+            closeModal={this.closeModal}
+            seeSelfieModal={this.state.seeSelfieModal}
+          />
+          {/* <ShareModal
           isVisible={this.state.seeShareModal}
           closeModal={() => this.setState({seeShareModal: false, brandMark:false})}
           uri={this.state.selfieURI}
@@ -856,7 +862,7 @@ export default class Stickers extends Component {
           setBrandMarkState={this.setBrandMarkState}
           captureView={this.captureView}
         /> */}
-        {/* <Modal
+          {/* <Modal
           isVisible={this.state.facebookShareAlert}
           //backdropOpacity={100}
           //animationIn='none'
@@ -872,8 +878,8 @@ export default class Stickers extends Component {
         >
           <Text>Share to facebook a success</Text>
         </Modal> */}
-      </View>
-    </SafeAreaView>
+        </View>
+      </SafeAreaView>
     );
   }
 }
