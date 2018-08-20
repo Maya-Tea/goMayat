@@ -1,3 +1,3 @@
 # goMayat
 
-hodge podge of an app
+app showcasing various react-native components 
